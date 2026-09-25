@@ -9,13 +9,13 @@ jobs:
     steps:
       # リポジトリのチェックアウト
       - name: Check out my unity project.
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Create LFS file list
         run: git lfs ls-files -l | cut -d' ' -f1 | sort > .lfs-assets-id
 
       # LFSファイルのキャッシュを取得する
       - name: Restore LFS cache
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         id: lfs-cache
         with:
           path: .git/lfs
@@ -34,7 +34,7 @@ jobs:
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
         
       # Cache
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         with:
           path: Library
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
